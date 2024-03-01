@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 
 * {
   margin: 0;
@@ -17,7 +17,7 @@ button {
 }
 
 html {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 body {
@@ -105,7 +105,6 @@ section {
   color: whitesmoke;
   padding: 0.25em;
 }
-
 
 .listItems {
   flex-grow: 1;
