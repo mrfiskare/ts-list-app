@@ -23,6 +23,8 @@ scaffolding automatically using via the following terminal command:
 npm create vite@latest
 ```
 
+---
+
 ## Using Prettier on the project
 
 ### What is Prettier?
@@ -50,9 +52,99 @@ Webstorm Settings → Tools → Actions on save → Tick _Reformat Code_
 
 This should fix the problem of Prettier not running on save.
 
-## TODO: Singleton Models/Classes
+---
 
-## TODO: Using interfaces and private constructors
+## Singleton design pattern
+
+### What is the Singleton pattern?
+
+The Singleton pattern restricts the instantiation of a class to one 'single' instance. This is useful
+when exactly one object is needed.
+
+In this project's case, only one `FullList` object can be created. This ensures the consistency of data
+across the application.
+
+### Major takeaways with Singletons
+
+* A Singleton class should have a `static instance` field.
+* A Singleton's constructor should always be private to prevent direct construction calls with the `new` operator.
+* A Singleton class should provide a `static` method to access the single instance.
+
+---
+<details>
+  <summary>Example: Singleton class with a static instance field</summary>
+
+```typescript
+// @formatter:off
+
+export default class FullList implements List {
+  static instance: FullList = new FullList();
+
+  private constructor(
+    private _list: ListItem[] = []
+  ) {
+  }
+}
+
+// @formatter:on
+```
+
+With this approach, you'd access the single instance by directly referencing the `instance` field:
+
+```typescript
+FullList.instance.load();
+```
+
+Here, `FullList.instance` refers to the single instance of `FullList`, and you're calling the `load()`
+method on that instance. The key point is that the constructor of `FullList` is private.
+
+</details>
+
+---
+<details>
+  <summary>Example: Singleton class with a static method</summary>
+
+```typescript
+// @formatter:off
+
+export default class FullList implements List {
+  private static _instance: FullList;
+
+  private constructor(
+    private _list: ListItem[] = []
+  ) {
+  }
+
+  public static getInstance(): FullList {
+    if (!FullList._instance) {
+      FullList._instance = new FullList();
+    }
+    return FullList._instance;
+  }
+}
+
+// @formatter:on
+```
+
+With this approach, you'd access the single instance using a static method `getInstance()`:
+
+```typescript
+const myListInstance = FullList.getInstance();
+myListInstance.load();
+```
+
+</details>
+
+---
+
+## TypeScript parameter properties
+
+In TypeScript when you declare a constructor parameter with an access modifier (such as `private` or `public`),
+TypeScript implicitly creates a class member with that name and assigns the value of the parameter to it.
+This shorthand notation saves you from explicitly declaring the member separately, reducing the boilerplate code.
+
+
+---
 
 ## Rendering the list to the DOM
 
@@ -60,12 +152,10 @@ First, we clear the DOM, then we create the HTML elements (`li`, `checkbox`) usi
 `FullList` typed object. This object implements the `List` interface, thus it has a
 `ListItem` array that we can work with.
 
-<details>
-<summary>
+### Dynamic HTML list item element creation
 
-##### Expand to see the code for dynamic list item element creation (found in ```src/templates/ListTemplate.ts```)
-
-</summary>
+This code can be found in `src/templates/ListTemplate.ts`. The generated `li` elements
+will be placed into an `ul` element of the DOM that has the id of `listItems`.
 
 ```ts
 // @formatter:off
@@ -87,16 +177,7 @@ render(fullList: FullList) {
 // @formatter:on
 ```
 
-</details>
-
-<details>
-<summary>
-
-##### Expand to see how the dynamically created li elements will look like this in the DOM
-
-</summary>
-
-These `li` elements will be placed into an `ul` element that has an id of `listItems`.
+This is how a generated `li` element would look like in the DOM:
 
 ```html
 
@@ -106,8 +187,6 @@ These `li` elements will be placed into an `ul` element that has an id of `listI
   <button class='button'>X</button>
 </li>
 ``` 
-
-</details>
 
 
 
