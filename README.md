@@ -49,3 +49,66 @@ so I had to do this additional step:
 Webstorm Settings → Tools → Actions on save → Tick _Reformat Code_
 
 This should fix the problem of Prettier not running on save.
+
+## TODO: Singleton Models/Classes
+
+## TODO: Using interfaces and private constructors
+
+## Rendering the list to the DOM
+
+First, we clear the DOM, then we create the HTML elements (`li`, `checkbox`) using a
+`FullList` typed object. This object implements the `List` interface, thus it has a
+`ListItem` array that we can work with.
+
+<details>
+<summary>
+
+##### Expand to see the code for dynamic list item element creation (found in ```src/templates/ListTemplate.ts```)
+
+</summary>
+
+```ts
+// @formatter:off
+
+render(fullList: FullList) {
+  this.clear();
+  fullList.list.forEach((item) => {
+    const li = document.createElement('li') as HTMLLIElement;
+    li.className = 'item';
+
+    const check = document.createElement('input') as HTMLInputElement;
+    check.type = 'checkbox';
+    check.id = item.id;
+    check.checked = item.checked;
+    li.append(check);
+  });
+}
+
+// @formatter:on
+```
+
+</details>
+
+<details>
+<summary>
+
+##### Expand to see how the dynamically created li elements will look like this in the DOM
+
+</summary>
+
+These `li` elements will be placed into an `ul` element that has an id of `listItems`.
+
+```html
+
+<li class='item'>
+  <input type='checkbox' id='1'>
+  <label for='1'>eat</label>
+  <button class='button'>X</button>
+</li>
+``` 
+
+</details>
+
+
+
+
