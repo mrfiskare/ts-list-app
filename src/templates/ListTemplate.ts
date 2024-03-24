@@ -10,15 +10,18 @@ interface DOMList {
 
 export default class ListTemplate implements DOMList {
   ul: HTMLUListElement;
+  input: HTMLInputElement;
 
   static instance: ListTemplate = new ListTemplate();
 
   private constructor() {
     this.ul = document.getElementById('listItems') as HTMLUListElement;
+    this.input = document.getElementById('newItem') as HTMLInputElement;
   }
 
   clear() {
     this.ul.innerHTML = '';
+    this.input.value = '';
   }
 
   /*
