@@ -124,8 +124,11 @@ section {
 
 .listTitle__button {
     background-color: transparent;
-    color: whitesmoke;
-    padding: 0.25em;
+    color: #d9e7cb;
+    border: 1px solid #d9e7cb;
+    border-radius: 16px;
+    font-size: 18px;
+    padding: 10px;
 }
 
 .listItems {
