@@ -100,7 +100,7 @@ method on that instance. The key point is that the constructor of `FullList` is 
 
 </details>
 
----
+
 <details>
   <summary>Example: Singleton class with a static method</summary>
 
