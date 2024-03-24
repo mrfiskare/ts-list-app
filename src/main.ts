@@ -25,8 +25,6 @@ const initApp = () => {
       return;
     }
 
-    // TODO: Ternary statements
-
     const itemId: number = fullList.list.length
       ? parseInt(fullList.list[fullList.list.length - 1].id) + 1
       : 1;

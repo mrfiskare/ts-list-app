@@ -77,8 +77,6 @@ export default class ListTemplate implements DOMList {
       button.textContent = 'X';
       li.append(button);
 
-      // TODO: Anonymous functions in this method
-
       button.addEventListener('click', () => {
         fullList.removeItem(item.id);
         this.render(fullList);
