@@ -47,7 +47,7 @@ export default class ListTemplate implements DOMList {
       const li = document.createElement('li') as HTMLLIElement;
       li.className = 'item';
 
-      // Defining checkbox and it's properties, and adding it to the given list item
+      // Defining checkbox and its properties, and adding it to the given list item
 
       const check = document.createElement('input') as HTMLInputElement;
       check.type = 'checkbox';
@@ -60,14 +60,14 @@ export default class ListTemplate implements DOMList {
         fullList.save();
       });
 
-      // Defining label and it's properties, and adding it to the given list item
+      // Defining label and its properties, and adding it to the given list item
 
       const label = document.createElement('label') as HTMLLabelElement;
       label.htmlFor = item.id;
       label.textContent = item.item;
       li.append(label);
 
-      // Defining item delete button and it's properties, and adding it to the given list item
+      // Defining item delete button and its properties, and adding it to the given list item
 
       const button = document.createElement('button') as HTMLButtonElement;
       button.className = 'button';
