@@ -1,27 +1,23 @@
 import ListItem from './ListItem.ts';
 
 interface List {
-  list: ListItem[],
+  list: ListItem[];
 
-  load(): void,
+  load(): void;
 
-  save(): void,
+  save(): void;
 
-  clearList(): void,
+  clearList(): void;
 
-  addItem(itemObj: ListItem): void,
+  addItem(itemObj: ListItem): void;
 
-  removeItem(id: string): void
+  removeItem(id: string): void;
 }
 
 export default class FullList implements List {
-
   static instance: FullList = new FullList();
 
-  private constructor(
-    private _list: ListItem[] = []
-  ) {
-  }
+  private constructor(private _list: ListItem[] = []) {}
 
   get list(): ListItem[] {
     return this._list;
@@ -35,19 +31,16 @@ export default class FullList implements List {
     const storedList: string | null = localStorage.getItem('myList');
     if (typeof storedList !== 'string') return;
 
-    //const parsedList: { _id: string, _item: string, _checked: boolean }[] = JSON.parse(storedList);
-    // parsedList.forEach(itemObj => {
-    //   const newListItem = new ListItem(itemObj._id, itemObj._item, itemObj._checked);
-    //   FullList.instance.addItem(newListItem);
-    // });
-
-    const parsedList: ListItem[] = JSON.parse(storedList);
-
-    parsedList.forEach(itemObj => {
-      const newListItem = new ListItem(itemObj.id, itemObj.item, itemObj.checked);
+    const parsedList: { _id: string; _item: string; _checked: boolean }[] =
+      JSON.parse(storedList);
+    parsedList.forEach((itemObj) => {
+      const newListItem = new ListItem(
+        itemObj._id,
+        itemObj._item,
+        itemObj._checked
+      );
       FullList.instance.addItem(newListItem);
     });
-
   }
 
   save() {
@@ -65,7 +58,7 @@ export default class FullList implements List {
   }
 
   removeItem(id: string) {
-    this._list = this._list.filter(item => item.id !== id);
+    this._list = this._list.filter((item) => item.id !== id);
     this.save();
   }
 }
